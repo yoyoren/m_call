@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MES{if $ur_here} - {$ur_here} {/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="transport.js,common.js"}
+</head>
+<body>
+
+<h1>
+{if $action_link}
+<span class="action-span"><a href="{$action_link.href}">{$action_link.text}</a></span>
+{/if}
+{if $action_link2}
+<span class="action-span"><a href="{$action_link2.href}">{$action_link2.text}</a>&nbsp;&nbsp;</span>
+{/if}
+<span class="action-span1">21CAKE </span><span id="search_id" class="action-span1">{if $ur_here} - {$ur_here} {/if}</span>
+<div style="clear:both"></div>
+</h1>
+{insert_scripts files="utils.js,transport.js"}
+<div class="main-div">
+<form name="theForm" method="post" enctype="multipart/form-data" onsubmit="return check()">
+<table width="100%">
+  <tr>
+    <td class="label" width="50%">短信名称：</td>
+    <td>
+      <input type="text" name="name" maxlength="20" value="{$phone_sms.name}" size="24" id="name"/><font color="red">*</font></td>
+  </tr>
+  <tr>
+    <td class="label" width="50%">短信内容：</td>
+    <td>
+      <textarea name="content" rows="10" cols="25" id="content">{$phone_sms.content|escape}</textarea><font color="red">*</font></td>
+  </tr>
+  <tr>
+    <td class="label">
+      <input type="submit" value="提交内容" class="button" /></td>
+	<td>&nbsp;&nbsp;&nbsp;
+      <input type="reset" value="重置" class="button" />
+      <input type="hidden" name="act" value="{$form_act}" /></td>
+  </tr>
+</table>
+</form>
+</div>
+<script type="text/javascript">
+function check()
+{
+	var name = document.getElementById("name").value;
+	var content = document.getElementById("content").value;
+	if(name == '')
+	{
+		alert("短信名称不能为空");
+		return false;
+	}
+	if(content == '')
+	{
+		alert("短信内容不能为空");
+		return false;
+	}
+	else{
+		return true;
+	}
+	
+}
+</script>
+{include file="pagefooter.htm"}

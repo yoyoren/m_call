@@ -1,0 +1,88 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MES{if $ur_here} - {$ur_here} {/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/Layer.css" rel="stylesheet" type="text/css" />
+<link href="styles/Render.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="common.js,transport.js,utils.js,listtable.js,datepicker/WdatePicker.js"}
+</head>
+<body>
+<div class="page">
+<fieldset>
+<legend>{$ur_here}</legend>
+<form action="javascript:searchService()" name="searchForm" method="post">
+处理日期:<input name="sdate" type="text" onFocus="javascript:WdatePicker()" style="width:70px"/>-<input name="edate"  type="text" onFocus="javascript:WdatePicker()" style="width:70px"/>
+    坐席:<input type="text" id="kfgh" name="kfgh" style="width:40px;" /> 
+    类型:<select id="ntype" name="ntype"><option value="">全部</option>
+	<option value="投诉">投诉</option>
+	<option value="建议">建议</option>
+	<option value="咨询">咨询</option>
+	<option value="催单">催单</option>
+	<option value="推单">推单</option>
+	<option value="其他">其他</option></select>
+	状态:<select name="flag"><option value="0">未处理</option><option value="9">全部</option><option value="1">已处理</option><option value="2">处理中</option></select>
+    内容:<input type="text" id="conten" name="content" />
+    <input type="submit" id="btn" value="搜索售后" />
+</form>
+</fieldset>
+</div>
+<hr />
+<div class="page" id="listDiv">
+{/if}
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin center table_02">
+    <tr class="bglimeimg">
+        <td width="30px">ID</td>
+		<td width="40px">类型</td>
+		<td>单号</td>
+		<td>描述</td>
+		<td>处理详情</td>
+		<td width="60px">客服</td>
+        <td width="150px">处理时间</td>
+		<td width="60px;">状态</td>
+		<td width="60px">操作</td>
+    </tr>
+	{foreach from=$services item=info}
+  	<tr class="{cycle values='bggray',''}">
+        <td>{$info.serv_id}</td>
+        <td>{$info.serv_type}</td>
+        <td>{$info.order_sn}</td>
+        <td>{$info.serv_desc}</td>
+        <td>{$info.serv_content}</td>
+        <td>{$info.admin}</td>
+        <td>{$info.add_time}</td>
+        <td>{if $info.flag eq '0'}未处理{elseif $info.flag eq '1'}已处理{else}处理中{/if}</td>
+        <td><a href="service.php?act=info&id={$info.serv_id}" target='blank'>查看</a></td>
+     </tr>
+	 {foreachelse}
+     <tr ><td colspan="8" align="left" >无满足记录</td></tr>	 
+     {/foreach}
+	 <tr><td colspan="8" align="right">{include file="page.htm"}</td></tr>
+    </table>
+{if $full_page}
+</div>
+</body>
+<script language="javascript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+{literal}
+
+function searchService()
+{
+        listTable.filter['sdate']    = Utils.trim(document.forms['searchForm'].elements['sdate'].value);
+        listTable.filter['edate']    = Utils.trim(document.forms['searchForm'].elements['edate'].value);
+        listTable.filter['kfgh']     = Utils.trim(document.forms['searchForm'].elements['kfgh'].value);
+		listTable.filter['ntype']    = Utils.trim(document.forms['searchForm'].elements['ntype'].value);
+		listTable.filter['flag']     = Utils.trim(document.forms['searchForm'].elements['flag'].value);
+		listTable.filter['content']  = Utils.trim(document.forms['searchForm'].elements['content'].value);
+        listTable.filter['page']     = 1;
+        listTable.loadList();
+}
+</script>
+{/if}
+</html>

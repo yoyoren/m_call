@@ -1,0 +1,94 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<table width="100%" cellpadding="3" cellspacing="1">
+  <tr>
+    <td width="10%"><div align="left"><strong>下单客服</strong></div></td>
+    <td width="15%">{$order.kfgh|default:web}</td>
+    <td width="10%"><div align="left"><strong></strong></div></td>
+    <td></td>
+    <td width="10%"><div align="left"><strong>订单号</strong></div></td>
+    <td width="15%">{$order.order_sn}</td>
+    <td width="10%"><div align="left"><strong>订单状态</strong></div></td>
+    <td width="15%">{$order.status}</td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>订购人</strong></div></td>
+    <td>{$order.orderman}</td>
+    <td><div align="left"><strong>下单时间</strong></div></td>
+    <td>{$order.order_time}</td>
+    <td><div align="order_time"><strong>支付方式</strong></div></td>
+    <td>{$order.pay_name}:{$order.pay_note}</td>
+    <td><div align="left"><strong>送货时间</strong></div></td>
+    <td>{$order.best_time}</td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>收货人</strong></div></td>
+    <td colspan="3">{$order.consignee|escape}</td>
+    <td><div align="left"><strong>送货地址</strong></div></td>
+    <td colspan="3">[{$order.region}] {$order.address|escape}</td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>结款地址</strong></div></td>
+    <td colspan="3">{$order.money_address|escape}</td>
+    <td><div align="left"><strong>批次信息</strong></div></td>
+    <td>{$dis.shipping_timeplan_id}</td>
+    <td><div align="left"><strong>站点包号</strong></div></td>
+    <td">{$dis.shipping_station_name}-{$dis.shipping_pack_no}</td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>调度状态</strong></div></td>
+    <td>{$dis.status_value}</td>
+    <td><div align="left"><strong>调度时间</strong></div></td>
+    <td>{$dis.operate_time}</td>
+    <td><div align="left"><strong>商品信息</strong></div></td>
+    <td colspan="3">{$order.goods}</td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>餐具数量</strong></div></td>
+    <td>{$order.canju}</td>
+    <td><div align="left"><strong>蜡烛数量</strong></div></td>
+    <td>{$order.candle}</td>
+    <td><div align="left"><strong>生产提示</strong></div></td>
+    <td>{$order.scts}</td>
+    <td><div align="left"><strong>外送提示</strong></div></td>
+    <td>{$order.wsts}</td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>̧发票抬头</strong></div></td>
+    <td>{$order.inv_payee}</td>
+    <td><div align="left"><strong>发票内容</strong></div></td>
+    <td>{$order.inv_content}</td>
+    <td><div align="left"><strong>客户留言</strong></div></td>
+    <td colspan="3">{$order.postscript}</td>
+  </tr>
+  <tr>
+    <td><div align="left"><strong>生日牌</strong></div></td>
+    <td>{$order.card_name}</td>
+    <td><div align="left"><strong>内容</strong></div></td>
+    <td>{$order.card_message}</td>
+    <td><div align="left"><strong>客服备注</strong></div></td>
+    <td colspan="3">{$order.to_buyer}</td>
+  </tr>
+</table>
+<table cellpadding="3" width="100%" cellspacing="1">
+  <tr class="bggray">
+    <td colspan="5" align="left">操作日志</td>
+  </tr>
+  <tr class="bglimeimg">
+    <td>޸改前内容</td>
+    <td>޸改后内容</td>
+    <td>修改时间</td>
+    <td>操作客服</td>
+    <td>修改类型</td>
+  </tr>
+  {foreach from=$action item=list}
+  <tr>
+    <td><div align="center">{$list.order_fore}</div></td>
+    <td><div align="center">{$list.order_after}</div></td>
+    <td><div align="center">{$list.editime}</div></td>
+    <td><div align="center">{$list.admin_id}</div></td>
+    <td><div align="center">{$list.alter_type}</div></td>
+  </tr>
+  {foreachelse}
+  <tr><td colspan="5">无改单日志</td></tr>
+  {/foreach}
+</table>

@@ -1,0 +1,74 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MES{if $ur_here} - {$ur_here} {/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/Layer.css" rel="stylesheet" type="text/css" />
+<link href="styles/Render.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="common.js,transport.js,utils.js,listtable.js,datepicker/WdatePicker.js"}
+</head>
+<body>
+<div class="page">
+<fieldset>
+<legend>{$ur_here}</legend>
+<form action="javascript:searchService()" name="searchForm" method="post">
+处理日期:<input name="sdate" type="text" onFocus="javascript:WdatePicker()" style="width:70px"/>-<input name="edate"  type="text" onFocus="javascript:WdatePicker()" style="width:70px"/>
+    坐席:<input type="text" id="kfgh" name="kfgh" style="width:40px;" /> 
+    类型:<input type="text" id="ntype" name="ntype" />
+    单号:<input type="text" id="order_sn" name="order_sn" />
+    <input type="submit" id="btn" value="搜索售后" />
+</form>
+</fieldset>
+</div>
+<hr />
+<div class="page" id="listDiv">
+{/if}
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin center table_02">
+    <tr class="bglimeimg">
+        <td width="130px">订单号</td>
+		<td width="140px">时间</td>
+		<td>客服</td>
+		<td>改前内容</td>
+		<td width="160px">改后内容</td>
+        <td width="150px">修改类型</td>
+    </tr>
+	{foreach from=$services item=info}
+  	<tr class="{cycle values='bggray',''}">
+        <td>{$info.order_sn}</td>
+        <td>{$info.addtime}</td>
+        <td>{$info.admin_id}</td>
+        <td>{$info.order_fore}</td>
+        <td>{$info.order_after}</td>
+        <td>{$info.alter_type}</td>
+     </tr>
+	 {foreachelse}
+     <tr ><td colspan="8" align="left" >无满足记录</td></tr>	 
+     {/foreach}
+	 <tr><td colspan="8" align="right">{include file="page.htm"}</td></tr>
+    </table>
+{if $full_page}
+</div>
+</body>
+<script language="javascript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+{literal}
+
+function searchService()
+{
+        listTable.filter['sdate']    = Utils.trim(document.forms['searchForm'].elements['sdate'].value);
+        listTable.filter['edate']    = Utils.trim(document.forms['searchForm'].elements['edate'].value);
+        listTable.filter['kfgh']     = Utils.trim(document.forms['searchForm'].elements['kfgh'].value);
+		listTable.filter['ntype']    = Utils.trim(document.forms['searchForm'].elements['ntype'].value);
+		listTable.filter['order_sn'] = Utils.trim(document.forms['searchForm'].elements['order_sn'].value);
+        listTable.filter['page']     = 1;
+        listTable.loadList();
+}
+</script>
+{/if}
+</html>

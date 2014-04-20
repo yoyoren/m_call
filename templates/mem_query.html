@@ -1,0 +1,84 @@
+{if $full_page}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>客户查询</title>
+{insert_scripts files="common.js,transport.js,utils.js,listtable.js"}
+<link href="styles/Layer.css" rel="stylesheet" type="text/css" />
+<link href="styles/Render.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<fieldset>
+<legend>客户查询</legend>
+<form action="javascript:searchOrder()" name="searchForm" method="post">
+    手机号码:<input type="text" id="mobile" name="mobile" value="" /> 
+    其他电话:<input type="text" id="tel" name="tel" /> 
+    真实姓名:<input type="text" id="rea_name" name="rea_name" />
+    用户名:<input type="user_name" id="user_name" name="user_name" />
+    <input type="submit" id="btn" value="搜索用户" />
+</form>
+</fieldset>
+</div>
+    <hr />
+<div class="page" id="listDiv">
+{/if}
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin center table_02">
+    <tr class="bglimeimg">
+        <td width="50px">客户ID</td>
+		<td width="60px">真实姓名</td>
+		<td width="60px">用户名</td>
+		<td width="30px">积分</td>
+		<td width="80px">手机号</td>
+        <td width="60px">其他电话</td>
+		<td>备注</td>
+		<td width="80px">操作</td>
+    </tr>
+	{foreach from=$mem item=info}
+  	<tr class="{cycle values='bggray',''}">
+        <td>{$info.user_id}</td>
+        <td>{$info.rea_name}</td>
+        <td>{$info.user_name}</td>
+        <td>{$info.pay_points}</td>
+        <td>{$info.mobile_phone}</td>
+        <td>{$info.office_phone}</td>
+        <td>{$info.back_info}</td>
+        <td><a href="mem_user.php?act=showuser&id={$info.user_id}" target='blank'>查看</a>   <a href='mem_user.php?act=adduser' target='blank'>新建</a></td>
+     </tr>
+	 {foreachelse}
+     <tr ><td colspan="8" align="left" >无满足记录</td></tr>	 
+     {/foreach}
+	 <tr><td colspan="8" align="right">{include file="page.htm"}</td></tr>
+    </table>
+{if $full_page}
+</div>
+</body>
+<script language="javascript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+{literal}
+
+/**
+* 搜索订单
+*/
+function searchOrder()
+{
+        listTable.filter['mobile']    = Utils.trim(document.forms['searchForm'].elements['mobile'].value);
+        listTable.filter['tel']      = Utils.trim(document.forms['searchForm'].elements['tel'].value);
+		listTable.filter['rea_name']      = Utils.trim(document.forms['searchForm'].elements['rea_name'].value);
+		listTable.filter['user_name']     = Utils.trim(document.forms['searchForm'].elements['user_name'].value);
+        if(Utils.trim(document.forms['searchForm'].elements['pagesize']))
+		{
+			listTable.filter['pagesize']         = Utils.trim(document.forms['searchForm'].elements['pagesize'].value);
+		}
+        listTable.filter['page']         = 1;
+        listTable.loadList();
+}
+</script>
+{/if}
+</html>

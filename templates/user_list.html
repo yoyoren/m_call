@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>订单搜索</title>
+<style>
+body{color:#CC0033;font-size:12px;}
+td{font-size:12px;color:#000000}
+input{border:#CCCCCC 1px solid;}
+a:hover{color:#CC0000;}
+a:visited{color:#800080;text-decoration:underline;}
+.top{background-color:#FFFFCC;height:35px;}
+.main{border:#CCCCCC 0px solid;height:350px;}
+.resizeDivClass{position:relative;background-color:red;width:2px;z-index:1;left:expression(this.parentElement.offsetWidth-1);cursor:e-resize;}
+</style>
+</head>
+<script language=javascript>
+function MouseDownToResize(obj){
+obj.mouseDownX=event.clientX;
+obj.pareneTdW=obj.parentElement.offsetWidth;
+obj.pareneTableW=theObjTable.offsetWidth;
+obj.setCapture();
+}
+function MouseMoveToResize(obj){
+    if(!obj.mouseDownX) return false;
+    var newWidth=obj.pareneTdW*1+event.clientX*1-obj.mouseDownX;
+    if(newWidth>0)
+    {
+obj.parentElement.style.width = newWidth;
+theObjTable.style.width=obj.pareneTableW*1+event.clientX*1-obj.mouseDownX;
+}
+}
+function MouseUpToResize(obj){
+obj.releaseCapture();
+obj.mouseDownX=0;
+}
+</script>
+</head>
+<body class="top">
+<div class="main">
+	<table id=theObjTable STYLE="table-layout:fixed" cellspacing=1 cellpadding=1 bgcolor=#bab196 border=0>
+		<tr bgcolor=#CCCCFF>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width="40">
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				客户ID
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=70>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				真实姓名
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=100>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				用户名
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=40>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				积分
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=80>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				手机号
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=100>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				其他电话
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis">
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				备注
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=40>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				操作
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=40>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				操作
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=40>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				操作
+			</td>
+			<td valign=top style="overflow: hidden; text-overflow:ellipsis" width=40>
+				<font class="resizeDivClass" onmousedown="MouseDownToResize(this);" onmousemove="MouseMoveToResize(this);" onmouseup="MouseUpToResize(this);"></font>
+				操作
+			</td>
+		</tr>
+		<!--{foreach from=$users item=list}-->
+			<tr bgcolor=#FFFFFF onMouseOver="this.style.backgroundColor='#FFCCCC'" onMouseOut="this.style.backgroundColor=''">
+				<td bgcolor=#FFFF66>{$list.user_id}</td>
+				<td align=center>{$list.rea_name}</td>
+				<td>{$list.user_name}</td>
+				<td>{$list.pay_points}</td>
+				<td>{$list.mobile_phone}</td>
+				<td>{if $list.home_phone && $list.office_phone}{$list.home_phone}/{$list.office_phone}{else}{$list.home_phone}{$list.office_phone}{/if}</td>
+				<td>{$list.back_info}</td>
+				<td align=center width="30" bgcolor=#FFFF66><a href='mem_user.php?act=adduser' target='_blank'>新建</a></td>
+				<td align=center width="30" bgcolor=#FFFF66><a href="mem_user.php?act=showuser&id={$list.user_id}" target='_blank'>查看</a></td>
+				<td align=center width="30" bgcolor=#FFFF66><a href="mem_user.php?act=service&type=1&id={$list.user_id}" target='_blank'>售后</a></td>
+				<td align=center width="30" bgcolor=#FFFF66><a href="order.php?act=add&id={$list.user_id}" target='_blank'>订购</a></td>
+			</tr>
+           <!--{/foreach}-->
+	</table>
+	<table><tr><td>共计 <span id="totalRecords">{$record_count}</span>
+        条记录，共有 <span id="totalPages">{$page_count}</span>
+        页，当前第 <span id="pageCurrent">{$page}</span>
+        页，每页15条，
+        <span id="page-link">
+          <a href="user_search.php?act=list&page=1{$querystr}">第一页</a>
+          <a href="user_search.php?act=list&page={$pagef}{$querystr}">上一页</a>
+          <a href="user_search.php?act=list&page={$pagen}{$querystr}">下一页</a>
+          <a href="user_search.php?act=list&page={$page_count}{$querystr}">最末页</a>
+        </span></td></tr></table>
+</div>
+</body>
+</html>

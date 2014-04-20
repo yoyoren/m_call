@@ -1,0 +1,258 @@
+/* $Id: main.css 13991 2009-11-26 06:17:23Z bisc $ */
+body {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height:20px;
+	color: #000;
+	background-color:#fff;
+	height:22px;
+}
+ul{
+	list-style:none;
+	
+	padding:0px;
+}
+p, td, div,form,img {margin:0;padding:0;}
+
+th { font:12px "Verdana";font-weight:bold;}
+form { margin: 0px; padding: 0px;}
+
+a:link {color: #a76d1a; text-decoration: underline;}
+
+a:visited {color: #6164bc; text-decoration: underline;}
+
+a:hover {color: #999999; text-decoration: none;}
+
+a:active {color: #a76d1a; text-decoration: underline;}
+
+
+input { padding:1px 2px;
+}
+input[type="text"] 
+{
+    width:120px;
+    border: 1px solid #CCC;
+	
+}
+
+input[type="password"] 
+{
+    width: 150px;
+    border: 1px solid #CCC;
+}
+
+.main-div{}
+
+
+.main-div {
+  border: 1px solid #c8a062;
+  margin: 0px;
+  padding: 2px; 
+  line-height:18px;
+  font-size:14px;
+  width:1000px;
+}
+
+.main-div table {
+  border-top: 3px solid #FFF;
+  border-bottom: 3px solid #FFF;
+}
+
+td{
+	height:30px;
+}
+td.label {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  padding: 5px 1em;
+  width: 30%;
+}
+
+td.narrow-label {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  padding: 5px 1em;
+  width: 20%;
+}
+/*背景颜色
+----------------------------------------------------------*/
+.bgyellow{
+background-color:#ffe400;
+}
+.bggreen{
+background-color:#d0c974;
+/*color:#FFFFFF;d6d05e*/
+}
+.bgred{
+background-color:#e2e2e2;
+}
+
+.bgblue{ background-color:#af7d34; }
+
+.bglime{ background-color:#af7d34; border-width:0px;}
+.bgyellowgreen{ background-color:#eee1bc;}
+
+
+.bggray{ background-color:#f4f2f3;}
+.bgwhite{ background-color:#fffdde;}
+.bgDeepgray{ background-color:#e2e2e2;}
+
+.bglimeimg{ background-image: url(images/right_top_bg.jpg);
+height:26px;
+}
+
+.bgyellowgreenimg{ background-image: url(images/right_top_bg01.jpg);
+height:26px;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+table 
+{
+  border: solid 1px #d4d4d4;
+  text-indent:3px;
+  border-collapse:collapse;
+}
+
+table th
+{
+  padding: 1px 5px;
+  text-align: left;
+  background-color: #cfcfcf; 
+  border: solid 1px #c0c0c0;   
+}
+
+.tablemargin 
+{ 
+    margin:3px 0px;
+}
+.tablenone 
+{ 
+    border-width:0px;
+}
+
+.table_02
+{ 
+    border-collapse: collapse; 
+}
+.table_02 td
+{  
+     border: solid 1px #d4d4d4;
+}
+.highlight td
+{
+    background-color:#e2e2e2;
+}
+/*字体
+-----------------------------------------------------------*/
+.fontred {
+	color:#FF0000;
+}
+.fontbig{
+	font-size:15px;
+	font-weight: bold;
+}
+.fontwhite
+{ 
+	color:#efe1bc;    
+}
+
+td.micro-label {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  padding: 5px 1em;
+  width: 127px;
+  *width: 150px;
+}
+
+.button-div {
+  text-align: center;
+  padding: 3px 0;
+}
+input.button {
+  padding: 2px 8px 0px;
+  margin: 2px 2px;
+  border: 1px solid #2D5082;
+}
+
+
+input.capital {
+  text-transform: uppercase;
+}
+
+span.require-field {
+  margin-left: 1em;
+  font: 12px verdana;
+  color: #FF0000;
+}
+
+th.group-title {
+  text-align: left;
+}
+
+/*自动完成*/
+.ac_results {
+	padding: 0px;
+	border: 1px solid black;
+	background-color: white;
+	overflow: hidden;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/* 
+	if width will be 100% horizontal scrollbar will apear 
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 12px;
+	/* 
+	it is very important, if line-height not setted or setted 
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: white right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}
+.payment {line-height:25px;}
+#pay {line-height:25px; width:240px;}
+#usebonus {line-height:25px; width:200px;}
+#binfo {line-height:25px; height:50px; width:222px;}
+#bouns_info td{line-height:10px; height:10px;}
+
+.hd {line-height:16px; margin:0; overflow:hidden; }
+.right { float:right;}
+.left{ float:left;}
+.blank { clear:both; height:0px;}
+.blank2 { clear:both; height:2px;}
+.blank10 {margin-left:10px;}
+.blank30 {margin-left:30px;}
+.blank300 {margin-left:300px;}

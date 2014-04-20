@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MES - 售后处理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/Layer.css" rel="stylesheet" type="text/css" />
+<link href="styles/Render.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="common.js,transport.js,utils.js"}
+</head>
+<body>
+<div class="page">
+<fieldset>
+<legend>售后处理</legend>
+    <table width="100%">
+    <tr>
+        <td align="right" width="7%">用户名称:</td><td align="left" width="13%">{$user.user_name}</td>
+        <td align="right" width="7%">真实姓名:</td><td align="left" width="13%">{$user.rea_name}</td>
+        <td align="right" width="7%">手机号码:</td><td align="left" width="13%">{$user.mobile_phone}</td>
+        <td align="right" width="7%">座机号码:</td><td align="left" width="13%">{$user.home_phone}</td>
+		<td>&nbsp;</td><td>&nbsp;</td>  
+    </tr>
+	{if $user.back_info}<tr><td align="right">用户备注:</td><td align="left" colspan="9">{$user.back_info}</td></tr>{/if}
+	{if $user.question}<tr><td align="right">账户备注:</td><td align="left" colspan="9">{$user.question}</td></tr>{/if}
+    </table>
+</fieldset>
+</div>
+<hr />
+<div class="page">
+<form name="theForm" method="post" action="service.php?act=update">
+<table border="0" align="center" width="100%">
+   	<tr id="desc"><td width="80px">类型</td><td><select id="ntype" name="ntype">
+	<option value="投诉" {if $service.serv_type eq '投诉'}selected{/if}>投诉</option>
+	<option value="建议" {if $service.serv_type eq '建议'}selected{/if}>建议</option>
+	<option value="咨询" {if $service.serv_type eq '咨询'}selected{/if}>咨询</option>
+	<option value="催单" {if $service.serv_type eq '催单'}selected{/if}>催单</option>
+	<option value="推单" {if $service.serv_type eq '推单'}selected{/if}>推单</option>
+	<option value="其他" {if $service.serv_type eq '其他'}selected{/if}>其他</option></select>
+	<font color="#FF0000">({if $service.flag eq 0}未处理{elseif $service.flag eq 1}已处理{else}处理中{/if})</font>
+	&nbsp;&nbsp;添加坐席：{$service.admin}&nbsp;&nbsp;时间：{$service.add_time}
+	</td></tr>
+    <tr height="30" id="desc"><td width="80px">内容</td><td>{$service.serv_desc}</td></tr>
+	{if $service.order_id}
+    <tr height="30" id="desc"><td width="80px">订单</td><td><input type="text" id="order" value="{$order}" style="width:150px;" readonly />&nbsp;&nbsp;
+	<a href='javascript:loadin();'>订单详情</a>&nbsp;&nbsp;
+	<input type="hidden" name="order_id" value="{$service.order_id}" />
+	{/if}
+
+	{if $content}
+    <tr height="30" id="desc"><td width="80px">过程</td><td>{foreach from=$content item=ct}{$ct}<br />{/foreach}</div></td></tr>
+	<input type="hidden" name="content" value="{$service.serv_content}" />
+	{/if}	
+    <tr id="content"><td name="zixun">处理</td><td><textarea name="content2" rows="3" cols="60"></textarea></td></tr>
+    <tr height="30"><td name="zixun">状态</td>
+	<td><select name="flag"><option value="1">已处理</option><option value="2">处理中</option><option value="0">未处理</option></select>
+    &nbsp;&nbsp;&nbsp;&nbsp;配送站<input type="text" name="station" style="width:80px;" value="{$service.station}" />
+	&nbsp;配送员<input type="text" name="sender" style="width:80px;" value="{$service.sender}" />
+	</td></tr>
+	<input type="hidden" name="serv_id" value="{$service.serv_id}" />
+    <tr align="center"><td style="padding-top:10px" ></td><td><input type="submit" value="提交处理结果"  /></td></tr>
+    <tr><td colspan="2" id="msg"></td></tr>
+</table>
+</form>
+</div>
+<div class="page" id="detail"></div>
+</body>
+<script>
+function loadin()
+{
+  var sn = document.getElementById('order').value;
+  if(sn.length < 12)
+  {
+     alert('请输入正确的订单号!');return;
+  }
+  else
+  {
+     Ajax.call('order_check.php?act=load_info', 'order_sn=' + sn, loadResponse, 'GET', 'JSON');
+  }
+}
+
+function loadResponse(obj)
+{
+  if (obj.error)
+  {
+    alert(obj.error);
+    return false;
+  }
+  else
+  {
+	  try
+	  {
+		var layer = document.getElementById("detail");
+	
+		layer.innerHTML = (typeof obj == "object") ? obj.content : obj;
+	  }
+	  catch (ex) { }
+  }
+}
+function useosn(obj)
+{
+   document.getElementById('order').value = obj.options[obj.selectedIndex].text;
+   document.getElementById('orderid').value = obj.options[obj.selectedIndex].value;
+}
+</script>
+</html>
+
+

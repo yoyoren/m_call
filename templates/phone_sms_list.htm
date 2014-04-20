@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MES{if $ur_here} - {$ur_here} {/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="transport.js,common.js"}
+</head>
+<body>
+
+<h1>
+{if $action_link}
+<span class="action-span"><a href="{$action_link.href}">{$action_link.text}</a></span>
+{/if}
+{if $action_link2}
+<span class="action-span"><a href="{$action_link2.href}">{$action_link2.text}</a>&nbsp;&nbsp;</span>
+{/if}
+<span class="action-span1">21CAKE </span><span id="search_id" class="action-span1">{if $ur_here} - {$ur_here} {/if}</span>
+<div style="clear:both"></div>
+</h1>
+{insert_scripts files="utils.js,transport.js"}
+{if $full_page}
+{include file="pageheader.htm"}
+{insert_scripts files="utils.js,listtable.js,datepicker/WdatePicker.js"}
+<!-- 订单列表 -->
+<div class="list-div" id="listDiv">
+{/if}
+
+<table cellspacing='1' cellpadding='3' id='list-table'>
+  <tr>
+    <th width="25%"><a href="javascript:listTable.sort('address_name', 'DESC'); ">短信名称</a></th>
+    <th width="60%">短信内容</th>
+    <th width="15%">操作</th>
+  </tr>
+  {foreach from=$phone_sms_list item=list}
+  <tr>
+    <td align="center" >{$list.name}</td>
+    <td align="center">{$list.content}</td>
+    <td align="center"><a href="phone_sms.php?act=edit&id={$list.id}">修改</a>&nbsp;
+	<a href="javascript:;" onclick="listTable.remove({$list.id}, '要删除吗？', 'remove')">删除</a></td>
+  </tr>
+  {/foreach}
+</table>
+<!-- 分页 -->
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="center" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+  </div>
+<script language="JavaScript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+{literal}
+
+/**
+* 搜索订单
+*/
+function searchAddr()
+{
+        listTable.filter['address_name'] = Utils.trim(document.forms['searchForm'].elements['address_name'].value);
+        listTable.filter['area_name']    = Utils.trim(document.forms['searchForm'].elements['area_name'].value);
+        listTable.filter['station']    = Utils.trim(document.forms['searchForm'].elements['station'].value);
+        listTable.filter['page']         = 1;
+		//alert(listTable.filter);return false;
+        listTable.loadList();
+}
+</script>
+{/literal}
+
+{include file="pagefooter.htm"}
+{/if}

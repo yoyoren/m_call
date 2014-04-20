@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<title>{if $ur_here} - {$ur_here} {/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/Layer.css" rel="stylesheet" type="text/css" />
+<link href="styles/Render.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="page">
+<fieldset>
+    <legend>客户详情</legend>
+    <table width="100%">
+    <tr>
+        <td align="right" width="7%">用户名称:</td><td align="left" width="13%">{$user.user_name}</td>
+        <td align="right" width="7%">真实姓名:</td><td align="left" width="13%">{$user.rea_name}({if $user.sex eq 0}未知{elseif $user.sex eq 1 }男{elseif $user.sex eq 2 }女{else}协议客户{/if})</td>
+        <td align="right" width="7%">手机号码:</td><td align="left" width="13%">{$user.mobile_phone}</td>
+        <td align="right" width="7%">座机号码:</td><td align="left" width="13%">{$user.home_phone}</td>
+		<td>&nbsp;</td><td>&nbsp;</td>  
+    </tr>
+    <tr>
+        <td align="right" width="7%">用户生日:</td><td align="left" width="13%">{$user.birthday}</td>
+        <td align="right" width="7%">用户积分:</td><td align="left" width="13%">{$user.pay_points}</td>
+        <td align="right" width="7%">用户余额:</td><td align="left" width="13%">{$user.user_money}</td>
+        <td align="right" width="7%">初始密码</td><td align="left" width="13%">{$user.ec_salt}</td>
+		<td>&nbsp;</td><td>&nbsp;</td> 
+    </tr>
+	<tr><td align="right">用户备注:</td><td align="left" colspan="9">{$user.back_info}</td></tr>
+	<tr><td align="right">账户备注:</td><td align="left" colspan="9">{$user.question}</td></tr>
+    </table>
+        <p>
+    <a href="mem_user.php?act=adduser" >新建</a>  |   
+    <a href="order.php?act=add&id={$user.user_id}&agentuid={$uid}" >订购</a>  |   
+    <a href="mem_user.php?act=service&type=1&id={$user.user_id}&agentuid={$uid}" >建议咨询</a>  |   
+    <a href="mem_user.php?act=service&type=4&id={$user.user_id}&agentuid={$uid}" >推单催单</a>  |   
+    <a href="mem_user.php?act=service&type=3&id={$user.user_id}&agentuid={$uid}" >投诉</a>  |   
+    <a href="mem_user.php?act=edit&id={$user.user_id}&agentuid={$uid}">修改</a>|
+    <a href="mem_user.php?act=account&id={$user.user_id}&agentuid={$uid}">账户变动</a>  |
+	<a href="moneycard.php?act=list&id={$user.user_id}&agentuid={$uid}">礼金卡</a>  |
+    </p>
+<!--<p>
+    <a href="mem_user.php?act=adduser" target="_blank">新建</a>  |   
+    <a href="order.php?act=add&id={$user.user_id}&agentuid={$uid}" target="_blank">订购</a>  |   
+    <a href="mem_user.php?act=service&type=1&id={$user.user_id}&agentuid={$uid}" target="_blank">建议咨询</a>  |   
+    <a href="mem_user.php?act=service&type=4&id={$user.user_id}&agentuid={$uid}" target="_blank">推单催单</a>  |   
+    <a href="mem_user.php?act=service&type=3&id={$user.user_id}&agentuid={$uid}" target="_blank">投诉</a>  |   
+    <a href="mem_user.php?act=edit&id={$user.user_id}&agentuid={$uid}">修改</a>|
+    <a href="mem_user.php?act=account&id={$user.user_id}&agentuid={$uid}">账户变动</a>  |
+	<a href="moneycard.php?act=list&id={$user.user_id}&agentuid={$uid}">礼金卡</a>  |
+    </p>-->
+</fieldset>
+<hr />
+<table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin table_02">
+    <tr>
+      <td width="9%"  align="center" class="bglime">最近订单</td>
+      <td width="91%" valign="top">
+       <table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin center table_02">
+        <tr class="bglime">
+          <td width="4%">查看</td>
+          <td width="7%">修改</td>
+         <!-- <td width="7%">打印</td>-->
+          <td width="7%">订单状态</td>
+          <td width="12%">订单号</td>
+          <td width="16%">送货时间</td>
+          <td width="6%">订货人</td>
+          <td width="12%">电话</td>
+          <td width="7%">金额</td>
+          <td>产品信息</td>
+        </tr>
+        {foreach from = $order item = v}
+        <tr class="{cycle values='bggray',''}">
+          <td><a href="order.php?act=show&order_id={$v.order_id}" target="_blank">详情</a></td>
+          <td><a href="order.php?act=detail&order_id={$v.order_id}" target="_blank">详情</a></td>
+         <!-- <td>打印</td>-->
+          <td>{if $v.status eq '已确认'}<span style="font:bold;color:#FF0000;">{$v.status}</span>{else}{$v.status}{/if}</td>
+          <td>{$v.order_sn}</td>
+          <td>{$v.best_time}</td>
+          <td>{$v.consignee}</td>
+          <td>{if $v.ordertel && $v.ordermobile}{$v.ordertel}/{$v.ordermobile}{else}{$v.ordertel}{$v.ordermobile}{/if}</td>
+          <td>{$v.order_amount}</td>
+          <td>{if $v.status eq '已确认'}<span style="font:bold;color:#FF0000;">{$v.goods}</span>{else}{$v.goods}{/if}</td>
+          </tr>
+		  {foreachelse}
+		  <tr><td colspan="10" align="left">暂无订单</td></tr>
+         {/foreach}
+        </table>
+		{if $count > 5}
+        <span style="float:right;padding-right:10px" ><a href="order.php?act=list&id={$user.user_id}" target="_blank">更多</a></span>
+		{/if}
+      </td>
+    </tr>
+  </table>
+  <table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin table_02">
+    <tr>
+      <td width="9%"  align="center" class="bglime">最近服务</td>
+      <td width="91%">
+	         <table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin center table_02">
+        <tr class="bglime">
+          <td width="4%">详情</td>
+		  <td width="4%">类型</td>
+          <td width="50%">投诉内容</td>
+          <td width="6%">状态</td>
+          <td width="6%">受理人</td>
+          <td width="14%">受理时间</td>
+        </tr>
+        {foreach from = $tousu item = t}
+        <tr class="{cycle values='bggray',''}">
+          <td><a href="service.php?act=info&id={$t.serv_id}" target="_blank">详情</a></td>
+          <td>{$t.serv_type }</td>
+          <td align="left">{$t.serv_desc }</td>
+          <td>{if $t.flag eq '0'}未处理{elseif $t.flag eq '1'}已处理{else}处理中{/if}</td>
+          <td>{$t.admin}</td>
+          <td>{$t.add_time}</td>
+          </tr>
+		  {foreachelse}
+		  <tr><td colspan="9" align="left">暂无投诉记录</td></tr>
+         {/foreach}
+        </table>
+         </td>
+    </tr>
+   
+  </table>
+     <table width="100%" border="0" cellpadding="0" cellspacing="1" class="tablemargin table_02">
+      <tr>
+      <td width="9%"  align="center" class="bglime">最近回访</td>
+      <td width="91%"> 
+      
+      
+            无回访记录
+         
+         </td>
+    </tr>
+  </table>
+  <br/>
+   <form action="do.php" method='get'>
+  <div style="padding-left:20px;font-size:14px;font-weight:bold;">客户查询:&nbsp;<input type='text' name="tel"><input type="submit" value="go"/></div>
+  </form><br />
+  <a target="_blank" style="padding-left:20px;font-size:14px;font-weight:bold;" href="/callsearch/order_stat.php?act=">订单查询</a>
+</body>
+</html>

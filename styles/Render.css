@@ -1,0 +1,517 @@
+﻿body {
+	font-family: "宋体";
+	font-size: 12px;
+	line-height:20px;
+	color: #000;
+	background-color:#fff;
+	height:22px;
+}
+
+img{
+    border:0;
+    clear:both;
+}
+/* 标题   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #000;
+    font-family: "宋体";
+}
+
+h1
+{
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+h2
+{
+    padding: 0 0 10px 0; text-align:center;
+}
+h3
+{
+    font-size: 1.2em;
+}
+h4
+{
+    font-size: 1.1em;
+}
+h5, h6
+{
+    font-size: 1em;
+}
+/* 链接
+----------------------------------------------------------*/
+a:link {color: #a76d1a; text-decoration: underline;}
+
+a:visited {color: #6164bc; text-decoration: underline;}
+
+a:hover {color: #999999; text-decoration: none;}
+
+a:active {color: #a76d1a; text-decoration: underline;}
+
+
+
+/* 表单元素 
+----------------------------------------------------------*/
+fieldset 
+{
+    margin: 6px 0;
+    padding: 6px;
+    border: 1px solid #CCC;
+}
+
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset label 
+{
+    display: block;
+}
+
+fieldset label.inline 
+{
+    display: inline;
+}
+
+legend 
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+input { padding:1px 2px;
+}
+input[type="text"] 
+{
+    width:120px;
+    border: 1px solid #CCC;
+}
+
+input[type="password"] 
+{
+    width: 150px;
+    border: 1px solid #CCC;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+table 
+{
+  border: solid 1px #d4d4d4;
+  text-indent:3px;
+}
+
+table th
+{
+  padding: 6px 5px;
+  text-align: left;
+  background-color: #cfcfcf; 
+  border: solid 1px #c0c0c0;   
+}
+
+.tablemargin 
+{ 
+    margin:3px 0px;
+}
+.tablenone 
+{ 
+    border-width:0px;
+}
+
+.table_02
+{ 
+    border-collapse: collapse; 
+}
+.table_02 td
+{  
+     border: solid 1px #d4d4d4;
+}
+.highlight td
+{
+    background-color:#e2e2e2;
+}
+/*字体
+-----------------------------------------------------------*/
+.fontred {
+	color:#FF0000;
+}
+.fontbig{
+	font-size:15px;
+	font-weight: bold;
+}
+.fontwhite
+{ 
+	color:#efe1bc;    
+}
+
+/* div
+----------------------------------------------------------*/
+.left{
+	width:615px;
+	float:left;
+}
+.right{
+	width:380px;
+	float:right;
+}
+
+/*背景颜色
+----------------------------------------------------------*/
+.bgyellow{
+background-color:#ffe400;
+}
+.bggreen{
+background-color:#d0c974;
+/*color:#FFFFFF;d6d05e*/
+}
+.bgred{
+background-color:#e2e2e2;
+}
+
+.bgblue{ background-color:#af7d34; }
+
+.bglime{ background-color:#af7d34; border-width:0px;}
+.bgyellowgreen{ background-color:#eee1bc;}
+
+
+.bggray{ background-color:#f4f2f3;}
+.bgwhite{ background-color:#fffdde;}
+.bgDeepgray{ background-color:#e2e2e2;}
+
+.bglimeimg{ background-image: url(images/right_top_bg.jpg);
+height:26px;
+}
+
+.bgyellowgreenimg{ background-image: url(images/right_top_bg01.jpg);
+height:26px;
+}
+
+
+/*自动完成
+----------------------------------------------------------*/
+#autocomplete{ border: 1px solid #000; position: absolute; }
+/*每行的格式*/
+#autocomplete li{ display: block; text-align: left; height: 20px; line-height: 20px; background-color: #fff; cursor: default; padding: 0 5px; clear: both; }
+/*鼠标选中时的格式*/
+#autocomplete .selected{ background-color: #565da9; color: #fff; overflow: hidden; }
+/*鼠标离开时代格式*/
+#autocomplete .unselected{ background-color: #fff; color: #666; }
+/*关键字信息*/
+#autocomplete .keyname{ display: block; float: left; }
+/*关键字扩展信息*/
+#autocomplete .keyextend{ display: block; float: right; color: green; }
+#autocomplete .unselected .keyextend{ color: green; }
+#autocomplete .selected .keyextend{ color: #fff; }
+/*关闭*/
+#autocomplete .close{ text-align: right; }
+#autocomplete .close span{ color: blue; cursor: pointer; text-decoration: underline; }
+
+/*链接层呈现
+-----------------------------------------------------------*/
+#cluetip-close img {
+  border: 0;
+}
+#cluetip-title {
+  overflow: hidden;
+}
+#cluetip-title #cluetip-close {
+  float: right;
+  position: relative;
+}
+#cluetip-waitimage {
+  width: 43px;
+  height: 11px;
+  position: absolute;
+  background-image: url(images/wait.gif);
+}
+.cluetip-arrows {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: -11px;
+  height: 22px;
+  width: 11px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+#cluetip-extra {
+  display: none;
+}
+/***************************************
+   =cluetipClass: 'default' 
+-------------------------------------- */
+
+.cluetip-default {
+  background-color: #d9d9c2;
+}
+.cluetip-default #cluetip-outer {
+  position: relative;
+  margin: 0;
+  background-color: #f1f1f1;
+}
+.cluetip-default h3#cluetip-title {
+  margin: 0 0 5px;
+  padding: 8px 10px 4px;
+  font-size: 1.1em;
+  font-weight: normal;
+  background-color: #cfcfcf;
+  color: #000;
+}
+.cluetip-default #cluetip-title a {
+  color: #000;
+  font-size: 0.95em;
+}  
+.cluetip-default #cluetip-inner {
+  padding: 10px;
+}
+.cluetip-default div#cluetip-close { 
+  text-align: right;
+  margin: 0 5px 5px;
+  color: #900;
+}
+
+/* default arrows */
+
+.clue-right-default .cluetip-arrows {
+  background-image: url(images/darrowleft.gif);
+}
+.clue-left-default .cluetip-arrows {
+  background-image: url(images/darrowright.gif);
+  left: 100%;
+  margin-right: -11px;
+}
+.clue-top-default .cluetip-arrows {
+  background-image: url(images/darrowdown.gif);
+  top: 100%;
+  left: 50%;
+  margin-left: -11px;
+  height: 11px;
+  width: 22px;  
+}  
+.clue-bottom-default .cluetip-arrows {
+  background-image: url(images/darrowup.gif);
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  height: 11px;
+  width: 22px;
+}
+
+/* stupid IE6 HasLayout hack */
+.cluetip-rounded #cluetip-title,
+.cluetip-rounded #cluetip-inner {
+  zoom: 1;
+}
+/*日期选择器
+---------------------------------------------------------*/
+#calendar_div {
+	z-index: 10; border-bottom: #777 1px solid; border-left: #777 1px solid; padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: none; font-family: arial, helvetica, sans-serif; font-size: 14px; border-top: #777 1px solid; border-right: #777 1px solid; padding-top: 0px
+}
+#calendar_div a {
+	cursor: hand;
+}
+button.calendar_trigger {
+	width: 25px;
+}
+img.calendar_trigger {
+	margin: 2px; vertical-align: middle
+}
+#calendar_control {
+	width: 185px; float: left; color: #000; clear: both
+}
+#calendar_links {
+	width: 185px; float: left; color: #000; clear: both
+}
+#calendar_header {
+	width: 185px; float: left; color: #000; clear: both
+}
+#calendar {
+	width: 185px; float: left; color: #000; clear: both
+}
+#calendar_time {
+	width: 185px; float: left; color: #000; clear: both
+}
+#calendar_control {
+	background: #1fdeb3
+}
+#calendar_links {
+	background: #f1f1f1
+}
+#calendar_control a {
+	padding-bottom: 2px; padding-left: 5px; padding-right: 5px; letter-spacing: 1px; color: #000; font-size: 80%; font-weight: bold; padding-top: 2px
+}
+#calendar_links a {
+	padding-bottom: 2px; padding-left: 5px; padding-right: 5px; letter-spacing: 1px; color: #000; font-size: 80%; font-weight: bold; padding-top: 2px
+}
+#calendar_control a:hover {
+	background: #fdd; color: #333
+}
+#calendar_links a:hover {
+	background: #ddd; color: #333
+}
+.calendar_titlerow a:hover {
+	background: #ddd; color: #333
+}
+#calendar_clear {
+	float: left
+}
+#calendar_prev {
+	float: left
+}
+#calendar_current {
+	text-align: center; width: 35%; float: left
+}
+#calendar_close {
+	float: right
+}
+#calendar_next {
+	float: right
+}
+#calendar_header {
+	text-align: center; background: #eeee00; font-weight: bold
+}
+#calendar_time {
+	text-align: center; background: #eeee00; font-weight: bold
+}
+#calendar_header select {
+	border-bottom: 0px; border-left: 0px; background: #eeee00; color: #000; border-top: 0px; font-weight: bold; border-right: 0px
+}
+#calendar_time select {
+	border-bottom: 0px; border-left: 0px; background: #eeee00; color: #000; border-top: 0px; font-weight: bold; border-right: 0px
+}
+#calendar {
+	text-align: center; background: #f1f1f1; font-size: 100%
+}
+#calendar a {
+	width: 100%; display: block
+}
+#calendar a:hover {
+	color: #000
+}
+#calendar .calendar_titlerow {
+	background: #777
+}
+#calendar .calendar_titlerow a {
+	color: #000
+}
+#calendar .calendar_titlerow a:hover {
+	color: #000
+}
+#calendar .calendar_daysrow {
+	background: #f1f1f1; color: #666
+}
+#calendar .calendar_dayscell {
+	border-bottom: #ddd 1px solid; border-left: #ddd 1px solid; border-top: #ddd 1px solid; border-right: #ddd 1px solid
+}
+#calendar .calendar_dayscell a {
+	width: 100%; color: #000
+}
+#calendar .calendar_dayscell a:hover {
+	background: none transparent scroll repeat 0% 0%
+}
+#calendar .calendar_weekendcell  {
+	background-color :Silver;
+}
+#calendar .calendar_dayscellover {
+	border-bottom: #777 1px solid; border-left: #777 1px solid; background: #fff; border-top: #777 1px solid; border-right: #777 1px solid
+}
+#calendar .calendar_unselectable {
+	color: #888
+}
+#calendar_today {
+	background-color:#eeee00;
+}
+#calendar_currentday {
+	background-color:#ff0000;
+}
+#calendar_cover {
+	z-index: -1; position: absolute; filter: mask(); width: 300px; display: block; height: 300px; top: -1px; left: -1px
+}
+
+
+/* 其他定义
+----------------------------------------------------------*/
+.center
+{
+    text-align:center;
+}
+
+.spanunderline
+{
+    border-bottom:solid 1px blue;
+}
+
+ input[type="text"].textboxunderline
+{
+    outline-style:none;
+    border:none 0 #fff;
+    border-bottom:solid 1px blue; 
+}
+
+.line{background-image: url(images/line.gif); height:1px;}
+
+.Knowledge{ width:660px; float:left; margin-left:60px;}
+.Knowledge a{ text-decoration: underline;}
+.Knowledge_left{ width:240px; float:left; background-image: url(images/bgKnowledge_left.jpg); height:600px;}
+.Knowledge_left li{ margin-top:3px; width:236px}
+.Knowledge_left ol li{ line-height:23px; background-image: url(images/bgKnowledge_line.jpg); width:185px; margin-left:30px; list-style-type:disc}
+.padding{ padding:5px }
+
+.bgline{
+background-image: url(images/bg_line.gif);}
+
+
+/*自动完成*/
+.ac_results {
+	padding: 0px;
+	border: 1px solid black;
+	background-color: white;
+	overflow: hidden;
+	z-index: 99999;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: default;
+	display: block;
+	/* 
+	if width will be 100% horizontal scrollbar will apear 
+	when scroll mode will be used
+	*/
+	/*width: 100%;*/
+	font: menu;
+	font-size: 12px;
+	/* 
+	it is very important, if line-height not setted or setted 
+	in relative units scroll will be broken in firefox
+	*/
+	line-height: 16px;
+	overflow: hidden;
+}
+
+.ac_loading {
+	background: white right center no-repeat;
+}
+
+.ac_odd {
+	background-color: #eee;
+}
+
+.ac_over {
+	background-color: #0A246A;
+	color: white;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MES{if $ur_here} - {$ur_here} {/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="transport.js,common.js"}
+</head>
+<body>
+
+<h1>
+{if $action_link}
+<span class="action-span"><a href="{$action_link.href}">{$action_link.text}</a></span>
+{/if}
+{if $action_link2}
+<span class="action-span"><a href="{$action_link2.href}">{$action_link2.text}</a>&nbsp;&nbsp;</span>
+{/if}
+<span class="action-span1">21CAKE </span><span id="search_id" class="action-span1">{if $ur_here} - {$ur_here} {/if}</span>
+<div style="clear:both"></div>
+</h1>
+{insert_scripts files="utils.js,transport.js"}
+{if $full_page}
+{insert_scripts files="listtable.js,datepicker/WdatePicker.js"}
+<!-- 订单搜索 -->
+<div class="form-div">
+  <form action="javascript:searchAddr()" name="searchForm">
+    <img src="images/icon_search.gif" width="26" height="22" border="0" alt="SEARCH" />
+	工号<input name="kfgh" type="text" id="kfgh" size="5">
+    手机号<input name="phone" type="text" id="phone" size="15">
+    <input type="submit" value="搜索" class="button" />
+  </form>
+</div>
+
+<!-- 订单列表 -->
+<div class="list-div" id="listDiv">
+{/if}
+
+<table cellspacing='1' cellpadding='3' id='list-table'>
+  <tr>
+    <th width="10%">工号</th>
+    <th width="25%">手机号</th>
+    <th width="50%">短信内容</th>
+    <th width="13%">操作时间</th>
+  </tr>
+  {foreach from=$address_list item=list}
+  <tr>
+    <td align="center">{$list.kfgh}</td>
+    <td align="center">{$list.phone}</td>
+    <td align="center">{$list.content}</td>
+    <td align="center">{$list.operate_time}</td>
+  </tr>
+  {/foreach}
+</table>
+<!-- 分页 -->
+<table id="page-table" cellspacing="0">
+  <tr>
+    <td align="center" nowrap="true">
+    {include file="page.htm"}
+    </td>
+  </tr>
+</table>
+
+{if $full_page}
+  </div>
+<script language="JavaScript">
+listTable.recordCount = {$record_count};
+listTable.pageCount = {$page_count};
+
+{foreach from=$filter item=item key=key}
+listTable.filter.{$key} = '{$item}';
+{/foreach}
+{literal}
+
+/**
+* 搜索订单
+*/
+function searchAddr()
+{
+        listTable.filter['kfgh'] = Utils.trim(document.forms['searchForm'].elements['kfgh'].value);
+        listTable.filter['phone']    = Utils.trim(document.forms['searchForm'].elements['phone'].value);
+        listTable.filter['page']         = 1;
+		//alert(listTable.filter);return false;
+        listTable.loadList();
+}
+</script>
+{/literal}
+
+{include file="pagefooter.htm"}
+{/if}

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>MES{if $ur_here} - {$ur_here} {/if}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="styles/main.css" rel="stylesheet" type="text/css" />
+{insert_scripts files="transport.js,common.js"}
+</head>
+<body>
+
+<h1>
+{if $action_link}
+<span class="action-span"><a href="{$action_link.href}">{$action_link.text}</a></span>
+{/if}
+{if $action_link2}
+<span class="action-span"><a href="{$action_link2.href}">{$action_link2.text}</a>&nbsp;&nbsp;</span>
+{/if}
+<span class="action-span1">21CAKE </span><span id="search_id" class="action-span1">{if $ur_here} - {$ur_here} {/if}</span>
+<div style="clear:both"></div>
+</h1>
+{insert_scripts files="utils.js,transport.js"}
+<div class="main-div">
+<form name="theForm" method="post" enctype="multipart/form-data" onsubmit="return check()">
+<table width="100%">
+  <tr>
+  	<td class="label" width="50%">单条：<input type="radio" name="num" value="1" onclick="shownote(1)" id="1" /></td><td>批量：<input type="radio" name="num" value="2" onclick="shownote(2)" id="2" /> </td>
+  </tr>
+  <tr>
+    <td class="label" width="50%">手机号：</td>
+    <td>
+      	<input type="text" name="phone_num" maxlength="11" value="{$phone_sms.name}" size="20" id="one" style="display:none;" /><br />
+      	<font  style="display:none;" id="many">
+		<textarea name="phone_nums" rows="10" cols="30" id="add"></textarea><br />
+		<font color="red">批量手机号请用逗号“,”隔开，请在英文输入状态下用半角符输入。</font></font> 
+	</td>
+  </tr>
+  <tr>
+    <td class="label" width="50%">短信名称：</td>
+    <td>
+      <select name="sms_name" id="sms_name">
+	  	<option value="">请选择</option>
+		{foreach from=$phone_sms_list item=list}
+			<option value="{$list.id}">{$list.name}</option>
+		{/foreach}
+	  </select>
+	</td>
+  </tr>
+  <tr>
+    <td class="label">
+      <input type="submit" value="提交内容" class="button" /></td>
+	<td>&nbsp;&nbsp;&nbsp;
+      <input type="reset" value="重置" class="button" />
+      <input type="hidden" name="act" value="{$form_act}" />
+	  <input type="hidden" name="kfgh" value="{$kfgh}" /></td>
+  </tr>
+</table>
+</form>
+</div>
+<script type="text/javascript">
+function check()
+{
+	var sms_name = document.getElementById("sms_name").value;
+	var one = document.getElementById("one").value;
+	var add = document.getElementById("add").value;
+
+	if(sms_name == '')
+	{
+		alert("短信名称不能为空");
+		return false;
+	}
+	if(one == '' && document.getElementById("1").checked  == true)
+	{
+		alert("手机号不能为空");
+		return false;
+	}
+	if(add == '' && document.getElementById("2").checked  == true)
+	{
+		alert("手机号不能为空");
+		return false;
+	}
+	else{
+		return true;
+	}
+	
+}
+function shownote(obj)
+{
+  //alert(obj);
+  var txt1 = document.getElementById('one');
+  var txt2 = document.getElementById('many');
+  if(obj == '1')
+  {
+     txt1.style.display = '';
+     txt2.style.display = 'none';
+  }
+  else if(obj == '2')
+  {
+     txt2.style.display = '';
+     txt1.style.display = 'none';
+  }
+}
+
+</script>
+{include file="pagefooter.htm"}
