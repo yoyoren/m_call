@@ -5,7 +5,7 @@
  * $Author: bisc $
  * $Id: cls_template.php 0012
  */
-
+error_reporting(0);
 class cls_template
 {
     var $template_dir   = '';

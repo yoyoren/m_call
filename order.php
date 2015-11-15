@@ -478,7 +478,7 @@ else if ($_GET['act']=='detail')//订单修改
 	$order['shipping_fee'] = intval($order['shipping_fee']);
 	$amount = $order['order_amount'] + $order['money_paid'] + $order['bonus'] + $order['discount'] + $order['integral'] + $order['surplus'];
 	$order['money_paid']   = floatval($order['money_paid']);
-	
+	//var_dump($order['pay_id']);
 	//echo $amount,$order['goods_amount'],$order['pay_fee'],$order['integral'];
 	$order['attr_amount'] = $amount - $order['goods_amount']-$order['shipping_fee']-$order['pay_fee']-$order['integral'];
 	$order['add_date'] = date('Y-m-d H:i:s',$order['add_time']);

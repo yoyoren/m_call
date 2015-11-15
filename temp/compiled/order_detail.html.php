@@ -26,7 +26,8 @@
 送货地址:<?php echo $this->_var['address']; ?><br />
 收货信息:<?php echo $this->_var['order']['consignee']; ?> | <?php if ($this->_var['order']['mobile'] && $this->_var['order']['tel']): ?><?php echo $this->_var['order']['mobile']; ?>/<?php echo $this->_var['order']['tel']; ?><?php else: ?><?php echo $this->_var['order']['mobile']; ?><?php echo $this->_var['order']['tel']; ?><?php endif; ?><br />
 <?php if ($this->_var['order']['pay_id'] == 1): ?>结款地址:<?php echo $this->_var['order']['money_address']; ?><?php endif; ?>
-外送提示:<?php echo empty($this->_var['order']['wsts']) ? '无' : $this->_var['order']['wsts']; ?>
+
+外送提示:<?php echo empty($this->_var['order']['wsts']) ? '无' : $this->_var['order']['wsts']; ?><?php if ($this->_var['order']['pay_id'] == 4): ?> ;使用微信在线支付 <?php endif; ?>
 </p>
 <p style="margin-left:10px;">
 <table>

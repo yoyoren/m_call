@@ -26,7 +26,8 @@
 送货地址:{$address}<br />
 收货信息:{$order.consignee} | {if $order.mobile && $order.tel}{$order.mobile}/{$order.tel}{else}{$order.mobile}{$order.tel}{/if}<br />
 {if $order.pay_id eq 1}结款地址:{$order.money_address}{/if}
-外送提示:{$order.wsts|default:无}
+
+外送提示:{$order.wsts|default:无}{if $order.pay_id eq 4} ;使用微信在线支付 {/if}
 </p>
 <p style="margin-left:10px;">
 <table>
